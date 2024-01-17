@@ -1,0 +1,39 @@
+#!/usr/bin/bash
+
+export DISPLAY=:0
+inf="/tem/CLangWrapper_Progress"
+
+function msg(){
+  kdialog --sorry "CLANGWRAPPER: $*"
+}
+
+if echo "$CXX $CC" |grep -i clang; then  #TODO: check if slow
+  true
+else
+  msg "ERROR: compiler other than CLang detected!" \
+   "*Waiting for compile tools processes exit gracefully*"
+  killall -w make
+  killall -w cmake
+  exit
+fi
+
+
+echo  "»»»» DIR: $PWD" 2>&1 > "$inf"
+echo  "»»»» CMD: $*" 2>&1 >> "$inf"
+
+rc=1
+while [ $rc -eq 1 ]; do
+  [ "$0" == "/usr/bin/clang" ]
+  type="$?"
+  if [ "$type" == "0" ]; then #C
+    /usr/bin/clang $*
+  else
+    /usr/bin/clang++ $*  
+    #^^^^^ C++
+  fi
+  rc=$?
+
+  if [ $rc -ne 0 ]; then #compilation error
+    msg "Compilation Error – to RETRY last command, click OK ?"
+  fi
+done
