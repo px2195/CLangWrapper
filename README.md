@@ -1,2 +1,4 @@
 # CLangWrapper
-Two main functionality: 1. bypassing errors by RETRYING CC, CXX, LD etc. calls  2. Showing it explicitly, when shell's exported CC, CXX vars are active and set to CLANGWRAPPER script's realpath
+!!NOTE: testing overall script performance. We aren't „gods” to be „perfect”.
+The experimental solution to the suddenly failing make/cmake Linux soft builds. It also shows current processed build input file in the console/terminal emulator. Uses GUI dialog to ask when COMPILATION error occured — simple retrial when this compilation error occured, you have chance to correct it. Thus, the scipt allows to avoid timewasting at recompilations when typical, simple, frustrating build errors occured (it is often phenomenon in Linux world!!!, esp. on Arch Linux - compatible such as Manjaro Linux, AUR, big free projects, and even other).
+Two main functionality: 1. bypassing errors by RETRYING CC, CXX, LD etc. calls in the make/cmake toolchain,  2. Showing it explicitly, when shell's exported CC, CXX vars are active and set to CLANGWRAPPER script's realpath
